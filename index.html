@@ -204,9 +204,9 @@
         /* ===== ACTIVIDADES ===== */
         .activities-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            max-width: 500px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            max-width: 550px;
             margin: 0 auto;
         }
         .activity-card {
@@ -315,6 +315,34 @@
         }
 
         /* ===== RESPONSIVE ===== */
+        /* ===== COMPARTIR FOTOS ===== */
+        .photos-upload { text-align: center; }
+        .photos-dropzone {
+            border: 2px dashed rgba(212,175,55,0.4);
+            border-radius: 16px;
+            padding: 40px 20px;
+            margin: 0 auto 20px;
+            max-width: 400px;
+            cursor: pointer;
+            transition: border-color 0.3s, background 0.3s;
+        }
+        .photos-dropzone:hover, .photos-dropzone.dragover {
+            border-color: var(--gold);
+            background: rgba(212,175,55,0.05);
+        }
+        .photos-dropzone i { font-size: 2.5rem; color: var(--gold); display: block; margin-bottom: 12px; }
+        .photos-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 8px;
+            margin-top: 20px;
+        }
+        .photos-gallery img {
+            width: 100%; height: 100px; object-fit: cover;
+            border-radius: 8px; border: 1px solid rgba(212,175,55,0.2);
+        }
+        .photo-count { font-size: 0.85rem; opacity: 0.6; margin-top: 8px; }
+
         @media (max-width: 768px) {
             .countdown { grid-template-columns: repeat(2, 1fr); }
             .activities-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
@@ -355,7 +383,7 @@
     <div class="container">
         <!-- Header -->
         <header>
-            <img src="img/festejado.webp?v=2" alt="Tony" class="hero-photo">
+            <img src="img/festejado.webp?v=3" alt="Tony" class="hero-photo">
             <h1 class="main-title">Tony Fest</h1>
             <p class="celebrating-text">Celebrando</p>
             <div class="big-number">60</div>
@@ -421,9 +449,19 @@
                     <div class="activity-desc">y Buena Compa&ntilde;&iacute;a</div>
                 </div>
                 <div class="activity-card">
+                    <span class="activity-icon"><i class="fas fa-swimming-pool" style="color:var(--gold);"></i></span>
+                    <div class="activity-title">Alberca</div>
+                    <div class="activity-desc">Ref&eacute;scate</div>
+                </div>
+                <div class="activity-card">
                     <span class="activity-icon"><i class="fas fa-campground" style="color:var(--gold);"></i></span>
                     <div class="activity-title">&Aacute;rea para</div>
                     <div class="activity-desc">Camping</div>
+                </div>
+                <div class="activity-card">
+                    <span class="activity-icon"><i class="fas fa-sun" style="color:var(--gold);"></i></span>
+                    <div class="activity-title">After</div>
+                    <div class="activity-desc">Al d&iacute;a siguiente</div>
                 </div>
             </div>
             <p style="text-align:center;margin-top:25px;font-family:'Great Vibes',cursive;font-size:clamp(1.3rem,4vw,1.8rem);color:var(--gold-light);">La fiesta apenas comienza...</p>
@@ -452,8 +490,26 @@
 
             <!-- QR -->
             <div class="qr-container" style="margin-top:30px;">
-                <img src="img/qr.webp?v=2" alt="C&oacute;digo QR - Ubicaci&oacute;n">
+                <img src="img/qr.webp?v=3" alt="C&oacute;digo QR - Ubicaci&oacute;n">
                 <p class="qr-text">&iexcl;Escanea el c&oacute;digo<br>o haz click para llegar!</p>
+            </div>
+        </section>
+
+        <!-- Compartir Fotos -->
+        <section>
+            <h2 class="section-title"><i class="fas fa-camera"></i> Comparte tus Fotos</h2>
+            <p style="text-align:center;margin-bottom:20px;opacity:.8;">
+                &iexcl;Sube las fotos de la fiesta para que todos las disfruten!
+            </p>
+            <div class="photos-upload">
+                <div class="photos-dropzone" id="photosDropzone">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p style="color:var(--gold);">Toca para subir fotos</p>
+                    <p style="font-size:0.8rem;opacity:0.5;margin-top:6px;">JPG, PNG o WebP &bull; M&aacute;x 10 MB cada una</p>
+                </div>
+                <input type="file" id="photoInput" accept="image/*" multiple style="display:none;">
+                <p class="photo-count" id="photoCount"></p>
+                <div class="photos-gallery" id="photosGallery"></div>
             </div>
         </section>
 
@@ -512,6 +568,14 @@
             <p style="font-size: 0.9rem; opacity: 0.7;">
                 &#10022; 13 de Junio de 2026 &#10022;
             </p>
+            <div style="margin-top:20px;padding-top:15px;border-top:1px solid rgba(212,175,55,0.15);">
+                <p style="font-size:0.75rem;opacity:0.5;margin-bottom:6px;">Invitaci&oacute;n digital por</p>
+                <p style="font-size:1rem;">
+                    <a href="https://www.facebook.com/ProduccionesLuzel" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;font-weight:600;">
+                        <i class="fas fa-star" style="font-size:0.7rem;"></i> Producciones Luzel
+                    </a>
+                </p>
+            </div>
         </footer>
     </div>
 
@@ -544,7 +608,7 @@
 
     <!-- Musica de fondo -->
     <audio id="bgMusic" loop preload="auto">
-        <source src="musica-fondo.mp3?v=2" type="audio/mpeg">
+        <source src="musica-fondo.mp3?v=3" type="audio/mpeg">
     </audio>
     <button id="musicBtn" onclick="toggleMusic()" style="
         position: fixed; bottom: 20px; right: 20px; z-index: 1000;
@@ -586,10 +650,10 @@
     </script>
 
     <script>window.EVENTO_SLUG='60-tony-fest';</script>
-    <script src="js/evento-loader.js?v=2"></script>
-    <script src="visitas.js?v=2"></script>
-    <script src="js/rsvp-guest.js?v=2"></script>
-    <script src="js/foro7-footer.js?v=2"></script>
+    <script src="js/evento-loader.js?v=3"></script>
+    <script src="visitas.js?v=3"></script>
+    <script src="js/rsvp-guest.js?v=3"></script>
+    <script src="js/foro7-footer.js?v=3"></script>
 
     <!-- RSVP form handler (sin token) -->
     <script>
@@ -710,6 +774,67 @@
             if (pEl) { pEl.textContent = '\u{1F3AB} ' + g.pases_asignados + ' ' + (g.pases_asignados === 1 ? 'pase' : 'pases'); pEl.style.display = 'block'; }
             var btn = document.getElementById('openInvitation');
             if (btn) btn.textContent = 'Ver mi Invitaci\u00f3n';
+        }).catch(function(){});
+    })();
+    </script>
+
+    <!-- Compartir fotos -->
+    <script>
+    (function(){
+        var SB_URL  = 'https://nzpujmlienzfetqcgsxz.supabase.co';
+        var SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56cHVqbWxpZW56ZmV0cWNnc3h6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2ODYzMzYsImV4cCI6MjA5MDI2MjMzNn0.xl3lsb-KYj5tVLKTnzpbsdEGoV9ySnswH4eyRuyEH1s';
+        var BUCKET  = 'fotos-eventos';
+        var SLUG    = '60-tony-fest';
+        var gallery = document.getElementById('photosGallery');
+        var countEl = document.getElementById('photoCount');
+        var dropzone = document.getElementById('photosDropzone');
+        var input   = document.getElementById('photoInput');
+        if (!dropzone || !input) return;
+
+        dropzone.addEventListener('click', function(){ input.click(); });
+        dropzone.addEventListener('dragover', function(e){ e.preventDefault(); dropzone.classList.add('dragover'); });
+        dropzone.addEventListener('dragleave', function(){ dropzone.classList.remove('dragover'); });
+        dropzone.addEventListener('drop', function(e){ e.preventDefault(); dropzone.classList.remove('dragover'); handleFiles(e.dataTransfer.files); });
+        input.addEventListener('change', function(){ handleFiles(this.files); });
+
+        function handleFiles(files) {
+            Array.from(files).forEach(function(file){
+                if (!file.type.startsWith('image/') || file.size > 10*1024*1024) return;
+                var name = SLUG + '/' + Date.now() + '-' + Math.random().toString(36).substr(2,6) + '.' + file.name.split('.').pop();
+                var reader = new FileReader();
+                reader.onload = function(e){
+                    var img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = 'Foto compartida';
+                    gallery.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+                fetch(SB_URL + '/storage/v1/object/' + BUCKET + '/' + name, {
+                    method: 'POST',
+                    headers: { 'apikey': SB_ANON, 'Authorization': 'Bearer ' + SB_ANON, 'Content-Type': file.type, 'x-upsert': 'true' },
+                    body: file
+                }).catch(function(){});
+            });
+        }
+
+        // Cargar fotos existentes
+        fetch(SB_URL + '/storage/v1/object/list/' + BUCKET, {
+            method: 'POST',
+            headers: { 'apikey': SB_ANON, 'Authorization': 'Bearer ' + SB_ANON, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ prefix: SLUG + '/', limit: 100, sortBy: { column: 'created_at', order: 'desc' } })
+        })
+        .then(function(r){ return r.json(); })
+        .then(function(files){
+            if (!Array.isArray(files)) return;
+            var imgs = files.filter(function(f){ return f.name && !f.name.endsWith('/'); });
+            if (countEl && imgs.length) countEl.textContent = imgs.length + ' foto' + (imgs.length !== 1 ? 's' : '') + ' compartida' + (imgs.length !== 1 ? 's' : '');
+            imgs.forEach(function(f){
+                var img = document.createElement('img');
+                img.src = SB_URL + '/storage/v1/object/public/' + BUCKET + '/' + SLUG + '/' + f.name;
+                img.alt = 'Foto compartida';
+                img.loading = 'lazy';
+                gallery.appendChild(img);
+            });
         }).catch(function(){});
     })();
     </script>
