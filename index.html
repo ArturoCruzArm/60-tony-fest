@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tony Fest - Celebrando 60 a&ntilde;os de vida">
+    <meta name="theme-color" content="#071324">
+    <title>Tony Fest - 60 A&ntilde;os</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Playfair+Display:wght@400;700;900&family=Great+Vibes&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #071324;
+            --primary-light: #0d1f3c;
+            --primary-dark: #000000;
+            --gold: #D4AF37;
+            --gold-light: #e8c547;
+            --gold-dark: #A67C00;
+            --cream: #f0f0f0;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+            color: var(--cream);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image:
+                radial-gradient(circle at 20% 20%, rgba(212,175,55,0.06) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(212,175,55,0.06) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+
+        /* ===== SPLASH ===== */
+        .splash-screen {
+            position: fixed; inset: 0; z-index: 10000;
+            background: linear-gradient(135deg, #000 0%, #071324 100%);
+            display: flex; align-items: center; justify-content: center;
+            transition: opacity .8s ease, visibility .8s ease;
+        }
+        .splash-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .splash-content { text-align: center; padding: 2rem; }
+        .splash-icon { font-size: 3rem; animation: splashFloat 3s ease-in-out infinite; color: var(--gold); }
+        @keyframes splashFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+        .splash-subtitle { font-size: .85rem; letter-spacing: .35em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 1.5rem; }
+        .splash-names { font-size: clamp(2.5rem,8vw,4.5rem); color: var(--gold); margin: .5rem 0; font-family: 'Great Vibes', cursive; }
+        .splash-divider { width: 120px; height: 1px; background: linear-gradient(90deg,transparent,var(--gold),transparent); margin: 1rem auto; }
+        .splash-date { font-size: .95rem; letter-spacing: .15em; color: rgba(255,255,255,0.5); }
+        .splash-btn { display: inline-block; margin-top: 2.5rem; padding: 1rem 3rem; background: transparent; border: 2px solid var(--gold); border-radius: 50px; color: var(--gold); font-size: 1rem; font-weight: 600; letter-spacing: .1em; cursor: pointer; transition: all .3s; }
+        .splash-btn:hover { background: var(--gold); color: #000; transform: translateY(-3px); }
+        .splash-hint { font-size: .75rem; color: rgba(255,255,255,0.3); margin-top: 1rem; }
+
+        /* ===== HEADER ===== */
+        header { text-align: center; padding: 60px 20px 20px; position: relative; }
+
+        .hero-photo {
+            width: 200px; height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--gold);
+            box-shadow: 0 0 40px rgba(212,175,55,0.4);
+            margin: 0 auto 20px;
+            display: block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
+
+        .main-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(3rem, 10vw, 5.5rem);
+            color: var(--gold);
+            text-shadow: 0 4px 20px rgba(212,175,55,0.5);
+            margin: 10px 0 5px;
+            line-height: 1.1;
+        }
+
+        .celebrating-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: var(--cream);
+            opacity: 0.8;
+        }
+
+        .big-number {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(5rem, 15vw, 9rem);
+            font-weight: 900;
+            color: var(--gold-light);
+            text-shadow: 0 4px 30px rgba(212,175,55,0.6);
+            line-height: 1;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 4px 20px rgba(212,175,55,0.5); }
+            to { text-shadow: 0 4px 50px rgba(212,175,55,0.9); }
+        }
+
+        .years-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            letter-spacing: 12px;
+            color: var(--gold);
+        }
+
+        .divider {
+            width: 200px; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 25px auto;
+            position: relative;
+        }
+        .divider::before {
+            content: '\2726';
+            position: absolute; left: 50%; top: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--primary);
+            color: var(--gold);
+            font-size: 1.2rem;
+            padding: 0 10px;
+        }
+
+        /* ===== SECTIONS ===== */
+        section {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin: 30px 0;
+            border: 1px solid rgba(212,175,55,0.2);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            animation: fadeUp 0.8s ease-out;
+        }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6rem, 5vw, 2.2rem);
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute; bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 80px; height: 2px;
+            background: var(--gold);
+        }
+
+        .quote {
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            font-style: italic;
+            color: var(--gold-light);
+            margin: 30px 0;
+            padding: 30px;
+            border-left: 3px solid var(--gold);
+            border-right: 3px solid var(--gold);
+        }
+
+        /* ===== COUNTDOWN ===== */
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px; margin: 30px auto;
+            max-width: 600px;
+        }
+        .countdown-item {
+            background: rgba(255,255,255,0.08);
+            border-radius: 15px; padding: 20px 10px;
+            text-align: center;
+            border: 2px solid var(--gold);
+        }
+        .countdown-value {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 700; color: var(--gold-light);
+            display: block;
+        }
+        .countdown-label { font-size: 0.8rem; color: var(--cream); text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; }
+
+        /* ===== ACTIVIDADES ===== */
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .activity-card {
+            background: rgba(255,255,255,0.06);
+            border-radius: 15px;
+            padding: 25px 15px;
+            text-align: center;
+            border: 1px solid rgba(212,175,55,0.25);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .activity-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(212,175,55,0.2);
+        }
+        .activity-icon { font-size: 2.5rem; margin-bottom: 10px; display: block; }
+        .activity-title { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--gold); font-weight: 700; }
+        .activity-desc { font-size: 0.85rem; color: var(--cream); opacity: 0.8; margin-top: 4px; }
+
+        /* ===== EVENTO ===== */
+        .event-card {
+            background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(212,175,55,0.03));
+            border-radius: 15px; padding: 30px;
+            border: 2px solid var(--gold);
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .event-icon { font-size: 3rem; margin-bottom: 15px; display: block; color: var(--gold); }
+        .event-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--gold); margin-bottom: 15px; }
+        .event-info { color: var(--cream); margin: 10px 0; font-size: 1.05rem; }
+        .event-info strong { color: var(--gold-light); display: block; margin-bottom: 5px; }
+
+        .btn {
+            display: inline-block; padding: 14px 35px; margin: 10px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--primary-dark);
+            text-decoration: none; border-radius: 50px;
+            font-weight: 700; font-size: 0.95rem;
+            text-transform: uppercase; letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: none; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(212,175,55,0.4);
+        }
+        .btn:hover {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212,175,55,0.6);
+        }
+
+        /* ===== UBICACION ===== */
+        .location-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .qr-container {
+            text-align: center;
+        }
+        .qr-container img {
+            width: 180px; height: 180px;
+            border-radius: 12px;
+            border: 2px solid var(--gold);
+            background: #fff;
+            padding: 8px;
+        }
+        .qr-text {
+            font-size: 0.9rem;
+            color: var(--cream);
+            opacity: 0.7;
+            margin-top: 10px;
+        }
+
+        /* ===== RSVP ===== */
+        #rsvp { padding: 50px 20px; background: rgba(0,0,0,0.3); }
+        .rsvp-form { max-width: 500px; margin: 0 auto; background: rgba(255,255,255,0.08); border-radius: 16px; padding: 32px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 6px; font-size: .9rem; opacity: .85; }
+        .form-group input,
+        .form-group select,
+        .form-group textarea { width: 100%; padding: 12px 14px; border: 1px solid rgba(255,255,255,0.25); border-radius: 8px; background: rgba(255,255,255,0.1); color: inherit; font-size: 1rem; font-family: inherit; }
+        .form-group textarea { min-height: 80px; resize: vertical; }
+        #successMessage { display: none; text-align: center; padding: 24px; background: rgba(16,185,129,.15); border: 1px solid #10b981; border-radius: 12px; color: #6ee7b7; font-size: 1.05rem; margin-top: 16px; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center; padding: 40px 20px; margin-top: 40px;
+            border-top: 2px solid rgba(212,175,55,0.3);
+        }
+        footer p { color: var(--gold); margin: 10px 0; }
+
+        /* ===== CONFETTI ===== */
+        .confetti {
+            position: fixed;
+            font-size: 1.2rem;
+            opacity: 0.15;
+            pointer-events: none;
+            animation: confettiFall 12s infinite linear;
+            color: var(--gold);
+        }
+        @keyframes confettiFall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.15; }
+            90% { opacity: 0.15; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .countdown { grid-template-columns: repeat(2, 1fr); }
+            .activities-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            section { padding: 30px 20px; }
+            .btn { padding: 12px 28px; font-size: 0.85rem; }
+            .hero-photo { width: 160px; height: 160px; }
+        }
+        @media (max-width: 400px) {
+            .activities-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div class="splash-screen" id="splashScreen">
+        <div class="splash-content">
+            <div class="splash-icon"><i class="fas fa-star"></i></div>
+            <p class="splash-subtitle" id="splashSubtitle">Est&aacute;s invitado(a) a</p>
+            <h1 class="splash-names">Tony Fest</h1>
+            <div class="splash-divider"></div>
+            <p class="splash-date" id="splashDate">13 de Junio, 2026</p>
+            <p id="splashGuest" style="display:none;font-size:1.6rem;font-family:'Cormorant Garamond',serif;margin:.3rem 0;"></p>
+            <p id="splashPases" style="display:none;opacity:.75;font-size:.9rem;margin:.2rem 0 1rem;"></p>
+            <button class="splash-btn" id="openInvitation">Abrir Invitaci&oacute;n</button>
+            <p class="splash-hint">Toca para abrir</p>
+        </div>
+    </div>
+
+    <!-- Confetti dorado -->
+    <div class="confetti" style="left:5%;animation-delay:0s;">&#10022;</div>
+    <div class="confetti" style="left:15%;animation-delay:2s;">&#10038;</div>
+    <div class="confetti" style="left:30%;animation-delay:4s;">&#10022;</div>
+    <div class="confetti" style="left:45%;animation-delay:1s;">&#10038;</div>
+    <div class="confetti" style="left:60%;animation-delay:6s;">&#10022;</div>
+    <div class="confetti" style="left:75%;animation-delay:3s;">&#10038;</div>
+    <div class="confetti" style="left:90%;animation-delay:8s;">&#10022;</div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <img src="img/festejado.jpg" alt="Tony" class="hero-photo">
+            <h1 class="main-title">Tony Fest</h1>
+            <p class="celebrating-text">Celebrando</p>
+            <div class="big-number">60</div>
+            <p class="years-text">A &Ntilde; O S</p>
+            <div class="divider"></div>
+        </header>
+
+        <!-- Frase -->
+        <div class="quote">
+            &ldquo;Una vida, muchas historias<br>y una gran fiesta.&rdquo;
+        </div>
+
+        <!-- Invitacion -->
+        <section style="text-align:center;">
+            <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,3vw,1.4rem);line-height:1.8;">
+                <span style="font-size:2.5rem;display:block;margin-bottom:10px;"><i class="fas fa-calendar-alt" style="color:var(--gold);"></i></span>
+                <strong style="color:var(--gold);font-size:clamp(1.4rem,4vw,1.8rem);font-family:'Playfair Display',serif;">13 DE JUNIO DE 2026</strong><br><br>
+                Te invito a celebrar conmigo<br>este d&iacute;a tan especial.<br><br>
+                <span style="font-family:'Great Vibes',cursive;font-size:clamp(1.8rem,5vw,2.5rem);color:var(--gold-light);">&iexcl;No faltes!</span>
+            </p>
+        </section>
+
+        <!-- Countdown -->
+        <section>
+            <h2 class="section-title"><i class="fas fa-clock"></i> Cuenta Regresiva</h2>
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-value" id="days">00</span>
+                    <span class="countdown-label">D&iacute;as</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="hours">00</span>
+                    <span class="countdown-label">Horas</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="minutes">00</span>
+                    <span class="countdown-label">Minutos</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="seconds">00</span>
+                    <span class="countdown-label">Segundos</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Actividades -->
+        <section>
+            <h2 class="section-title"><i class="fas fa-glass-cheers"></i> Lo Que Te Espera</h2>
+            <div class="activities-grid">
+                <div class="activity-card">
+                    <span class="activity-icon"><i class="fas fa-music" style="color:var(--gold);"></i></span>
+                    <div class="activity-title">M&uacute;sica en Vivo</div>
+                    <div class="activity-desc">Norte&ntilde;o</div>
+                </div>
+                <div class="activity-card">
+                    <span class="activity-icon"><i class="fas fa-beer" style="color:var(--gold);"></i></span>
+                    <div class="activity-title">Tequila</div>
+                    <div class="activity-desc">y Cervezas</div>
+                </div>
+                <div class="activity-card">
+                    <span class="activity-icon"><i class="fas fa-users" style="color:var(--gold);"></i></span>
+                    <div class="activity-title">Amigos</div>
+                    <div class="activity-desc">y Buena Compa&ntilde;&iacute;a</div>
+                </div>
+                <div class="activity-card">
+                    <span class="activity-icon"><i class="fas fa-campground" style="color:var(--gold);"></i></span>
+                    <div class="activity-title">&Aacute;rea para</div>
+                    <div class="activity-desc">Camping</div>
+                </div>
+            </div>
+            <p style="text-align:center;margin-top:25px;font-family:'Great Vibes',cursive;font-size:clamp(1.3rem,4vw,1.8rem);color:var(--gold-light);">La fiesta apenas comienza...</p>
+        </section>
+
+        <!-- Detalles del Evento -->
+        <section>
+            <h2 class="section-title"><i class="fas fa-map-marker-alt"></i> Ubicaci&oacute;n del Evento</h2>
+            <div class="event-card">
+                <span class="event-icon"><i class="fas fa-map-pin"></i></span>
+                <h3 class="event-title">Quinta Margarita</h3>
+                <div class="event-info">
+                    <p style="margin-bottom:15px;">&iexcl;Acomp&aacute;&ntilde;ame a celebrar en un lugar especial<br>rodeado de amigos y buena vibra!</p>
+                </div>
+                <div class="event-info">
+                    <strong><i class="fas fa-clock"></i> Horario</strong>
+                    Recepci&oacute;n: 4:00 PM<br>
+                    <span style="font-size:0.9rem;opacity:0.7;">Hasta que el cuerpo aguante</span>
+                </div>
+                <div style="margin-top: 20px;">
+                    <a href="https://maps.app.goo.gl/tNfXcW498YgtWx7y5?g_st=aw" target="_blank" class="btn">
+                        <i class="fas fa-map-marked-alt"></i> Ver Ubicaci&oacute;n en Google Maps
+                    </a>
+                </div>
+            </div>
+
+            <!-- QR -->
+            <div class="qr-container" style="margin-top:30px;">
+                <img src="img/qr.png" alt="C&oacute;digo QR - Ubicaci&oacute;n">
+                <p class="qr-text">&iexcl;Escanea el c&oacute;digo<br>o haz click para llegar!</p>
+            </div>
+        </section>
+
+        <!-- RSVP -->
+        <section id="rsvp">
+            <h2 class="section-title">Confirma tu Asistencia</h2>
+            <p style="text-align:center;margin-bottom:28px;opacity:.8;">
+                Por favor confirma antes del <span id="confirmacionLimite">8 de junio de 2026</span>
+            </p>
+            <div id="personalizedWelcome" style="display:none;text-align:center;margin-bottom:24px;padding:20px;background:rgba(255,255,255,0.07);border-radius:12px;">
+                <p id="guestWelcomeText" style="font-size:1.1rem;margin-bottom:8px;"></p>
+                <p id="guestPassesText" style="opacity:.75;font-size:.95rem;"></p>
+            </div>
+            <div class="rsvp-form">
+                <form id="rsvpForm">
+                    <div class="form-group">
+                        <label for="name">Nombre Completo *</label>
+                        <input type="text" id="name" name="name" required placeholder="Tu nombre completo">
+                    </div>
+                    <div class="form-group">
+                        <label for="guests">N&uacute;mero de personas *</label>
+                        <input type="number" id="guests" name="guests" min="1" max="20" value="1" required>
+                        <small style="opacity:.6;display:block;margin-top:4px;">Incluye a todos los que asistir&aacute;n contigo</small>
+                    </div>
+                    <div class="form-group" id="nombresGroup" style="display:none;">
+                        <label>Nombres de los asistentes</label>
+                        <div id="nombresContainer"></div>
+                        <small style="opacity:.6;display:block;margin-top:4px;">Escribe el nombre de cada persona</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="attendance">&iquest;Confirmas tu asistencia? *</label>
+                        <select id="attendance" name="attendance" required>
+                            <option value="">Selecciona...</option>
+                            <option value="si">S&iacute;, asistir&eacute;</option>
+                            <option value="no">No podr&eacute; asistir</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensaje (Opcional)</label>
+                        <textarea id="message" name="message" placeholder="D&eacute;jame un mensaje..."></textarea>
+                    </div>
+                    <div style="text-align:center;">
+                        <button type="submit" class="btn" style="width:100%;max-width:300px;">Enviar Confirmaci&oacute;n</button>
+                    </div>
+                </form>
+                <div id="successMessage">
+                    &#10003; &iexcl;Gracias! Tu confirmaci&oacute;n ha sido registrada.
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p style="font-family:'Great Vibes',cursive;font-size:1.8rem;margin-bottom:10px;">&iexcl;Nos vemos para hacer historia!</p>
+            <div class="divider" style="margin:15px auto;"></div>
+            <p style="font-size: 0.9rem; opacity: 0.7;">
+                &#10022; 13 de Junio de 2026 &#10022;
+            </p>
+        </footer>
+    </div>
+
+    <!-- Countdown Timer - 13 de junio de 2026 a las 16:00 hrs -->
+    <script>
+        function updateCountdown() {
+            const eventDate = new Date(2026, 5, 13, 16, 0, 0).getTime(); // Mes 5 = Junio
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            if (distance < 0) {
+                document.getElementById('countdown').innerHTML = '<p style="text-align:center;font-size:1.5rem;color:var(--gold);">&iexcl;La fiesta ya comenz&oacute;! &#x1F389;</p>';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+
+    <!-- Musica de fondo -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="musica-fondo.mp3" type="audio/mpeg">
+    </audio>
+    <button id="musicBtn" onclick="toggleMusic()" style="
+        position: fixed; bottom: 20px; right: 20px; z-index: 1000;
+        background: rgba(7,19,36,0.85); backdrop-filter: blur(10px);
+        border: 2px solid var(--gold); border-radius: 50%;
+        width: 50px; height: 50px; cursor: pointer; font-size: 1.3rem;
+        color: var(--gold); transition: all 0.3s; box-shadow: 0 4px 15px rgba(212,175,55,0.4);
+    " title="M&uacute;sica">&#x1F3B5;</button>
+
+    <script>
+        let musicPlaying = false;
+        const audio = document.getElementById('bgMusic');
+        audio.volume = 0.4;
+
+        function toggleMusic() {
+            if (musicPlaying) {
+                audio.pause();
+                document.getElementById('musicBtn').textContent = '\u{1F3B5}';
+                musicPlaying = false;
+            } else {
+                audio.play();
+                document.getElementById('musicBtn').textContent = '\u{1F507}';
+                musicPlaying = true;
+            }
+        }
+
+        // Splash screen
+        const splashBtn = document.getElementById('openInvitation');
+        const splash = document.getElementById('splashScreen');
+        if (splashBtn && splash) {
+            splashBtn.addEventListener('click', () => {
+                splash.classList.add('hidden');
+                audio.play().then(() => {
+                    musicPlaying = true;
+                    document.getElementById('musicBtn').textContent = '\u{1F507}';
+                }).catch(() => {});
+            });
+        }
+    </script>
+
+    <script>window.EVENTO_SLUG='60-tony-fest';</script>
+    <script src="js/evento-loader.js?v=1"></script>
+    <script src="visitas.js?v=1"></script>
+    <script src="js/rsvp-guest.js?v=1"></script>
+    <script src="js/foro7-footer.js?v=1"></script>
+
+    <!-- RSVP form handler (sin token) -->
+    <script>
+    (function () {
+        var token = new URLSearchParams(window.location.search).get('inv');
+        var btn = document.getElementById('openInvitation');
+        if (btn) btn.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+        if (token) return; // rsvp-guest.js handles tokenized guests
+
+        var SB_URL  = 'https://nzpujmlienzfetqcgsxz.supabase.co';
+        var SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56cHVqbWxpZW56ZmV0cWNnc3h6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2ODYzMzYsImV4cCI6MjA5MDI2MjMzNn0.xl3lsb-KYj5tVLKTnzpbsdEGoV9ySnswH4eyRuyEH1s';
+        var SB_H    = { 'apikey': SB_ANON, 'Authorization': 'Bearer ' + SB_ANON, 'Content-Type': 'application/json' };
+        var SLUG    = '60-tony-fest';
+        var WA_NUMS = ['524771175729'];
+        var NOMBRE_EVENTO = 'los 60 a\u00f1os de Tony';
+
+        function buildNombreInputs(count) {
+            var container = document.getElementById('nombresContainer');
+            var group = document.getElementById('nombresGroup');
+            if (!container || !group) return;
+            container.innerHTML = '';
+            var numAcomp = Math.max(0, count - 1);
+            group.style.display = numAcomp > 0 ? 'block' : 'none';
+            for (var i = 0; i < numAcomp; i++) {
+                var inp = document.createElement('input');
+                inp.type = 'text';
+                inp.className = 'nombre-asistente';
+                inp.placeholder = 'Nombre acompa\u00f1ante ' + (i + 1);
+                inp.style.cssText = 'width:100%;padding:10px;margin-bottom:6px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;background:rgba(255,255,255,0.08);color:inherit;font-size:.95rem;';
+                container.appendChild(inp);
+            }
+        }
+
+        function attachHandler() {
+            var form = document.getElementById('rsvpForm');
+            if (!form) return;
+
+            var guestsInput = document.getElementById('guests');
+            if (guestsInput) {
+                guestsInput.addEventListener('change', function(){ buildNombreInputs(parseInt(this.value)||1); });
+                guestsInput.addEventListener('input', function(){ buildNombreInputs(parseInt(this.value)||1); });
+                buildNombreInputs(parseInt(guestsInput.value)||1);
+            }
+
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+                var nombre  = (document.getElementById('name').value || '').trim();
+                var pases   = parseInt(document.getElementById('guests').value || '1');
+                var asiste  = document.getElementById('attendance').value === 'si';
+                var mensaje = (document.getElementById('message').value || '').trim();
+                var nombres = Array.from(document.querySelectorAll('.nombre-asistente'))
+                    .map(function(inp){ return inp.value.trim(); }).filter(Boolean);
+                if (!nombre) return;
+                var submitBtn = form.querySelector('button[type="submit"]');
+                if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Enviando...'; }
+                try {
+                    var evR = await fetch(SB_URL + '/rest/v1/eventos?slug=eq.' + SLUG + '&select=id&limit=1', { headers: SB_H });
+                    var evArr = await evR.json();
+                    var ev = evArr[0];
+                    if (ev && ev.id) {
+                        var invR = await fetch(SB_URL + '/rest/v1/invitados', {
+                            method: 'POST',
+                            headers: Object.assign({}, SB_H, { 'Prefer': 'return=representation' }),
+                            body: JSON.stringify({
+                                evento_id: ev.id, nombre: nombre,
+                                pases_asignados: pases, pases_confirmados: pases,
+                                asiste: asiste, status: asiste ? 'confirmada' : 'declinada',
+                                mensaje: mensaje || null,
+                                fecha_confirmacion: new Date().toISOString()
+                            })
+                        });
+                        var invArr = await invR.json();
+                        var inv = invArr[0];
+                        if (inv && inv.id && nombres.length) {
+                            await fetch(SB_URL + '/rest/v1/acompanantes', {
+                                method: 'POST', headers: Object.assign({}, SB_H, { 'Prefer': 'return=minimal' }),
+                                body: JSON.stringify(nombres.map(function(n, i){ return { invitado_id: inv.id, nombre: n, orden: i }; }))
+                            });
+                        }
+                    }
+                } catch (err) {}
+                form.style.display = 'none';
+                var succ = document.getElementById('successMessage');
+                if (succ) succ.style.display = 'block';
+                var nombresStr = nombres.length ? '\nAsistentes: ' + nombres.join(', ') : '';
+                var txt = asiste
+                    ? 'Hola, confirmo mi asistencia a ' + NOMBRE_EVENTO + '.\nNombre: ' + nombre + '\nPersonas: ' + pases + nombresStr + (mensaje ? '\nMensaje: ' + mensaje : '')
+                    : 'Hola, lamentablemente no podr\u00e9 asistir a ' + NOMBRE_EVENTO + '.\nNombre: ' + nombre + (mensaje ? '\nMensaje: ' + mensaje : '');
+                WA_NUMS.forEach(function(num) { window.location.href = 'https://wa.me/' + num + '?text=' + encodeURIComponent(txt); });
+            });
+        }
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', attachHandler);
+        else attachHandler();
+    })();
+    </script>
+
+    <!-- Splash personalizado con token -->
+    <script>
+    (function(){
+        var token = new URLSearchParams(window.location.search).get('inv');
+        if (!token) return;
+        var SB_URL = 'https://nzpujmlienzfetqcgsxz.supabase.co';
+        var SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56cHVqbWxpZW56ZmV0cWNnc3h6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2ODYzMzYsImV4cCI6MjA5MDI2MjMzNn0.xl3lsb-KYj5tVLKTnzpbsdEGoV9ySnswH4eyRuyEH1s';
+        fetch(SB_URL + '/rest/v1/invitados?token=eq.' + encodeURIComponent(token) + '&select=nombre,pases_asignados&limit=1', { headers: { 'apikey': SB_ANON, 'Authorization': 'Bearer ' + SB_ANON } })
+        .then(function(r){ return r.json(); })
+        .then(function(rows){
+            if (!rows || !rows.length) return;
+            var g = rows[0];
+            var sub = document.getElementById('splashSubtitle');
+            var dateEl = document.getElementById('splashDate');
+            var gEl = document.getElementById('splashGuest');
+            var pEl = document.getElementById('splashPases');
+            if (sub) sub.textContent = 'Hola,';
+            document.querySelectorAll('.splash-names').forEach(function(el){ el.style.display = 'none'; });
+            if (dateEl) dateEl.style.display = 'none';
+            var extras = g.pases_asignados - 1;
+            if (gEl) { gEl.textContent = extras > 0 ? g.nombre + ' y ' + extras + ' m\u00e1s' : g.nombre; gEl.style.display = 'block'; }
+            if (pEl) { pEl.textContent = '\u{1F3AB} ' + g.pases_asignados + ' ' + (g.pases_asignados === 1 ? 'pase' : 'pases'); pEl.style.display = 'block'; }
+            var btn = document.getElementById('openInvitation');
+            if (btn) btn.textContent = 'Ver mi Invitaci\u00f3n';
+        }).catch(function(){});
+    })();
+    </script>
+</body>
+</html>
